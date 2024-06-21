@@ -124,20 +124,24 @@ class RegisterViewModel(
     }
 
     private fun handleErrors(throwable: Throwable) {
+        val errorMessage = mutableListOf<Int?>()
         if (throwable is BackendError) {
             throwable.errorCodes.forEach {
                 when (it) {
                     USERS_USER_EXISTS -> {
                         emailError.value =
                             R.string.error_message_registration_user_already_exists
+                        errorMessage.add(emailError.value!!)
                     }
                     VALIDATION_PASSWORD_TOO_SHORT -> {
                         passwordError.value = R.string.error_message_registration_password_too_short
                         passwordConfirmationError.value =
                             R.string.error_message_registration_password_too_short
+                        errorMessage.add(passwordConfirmationError.value!!)
                     }
                     VALIDATION_EMAIL_INVALID -> {
                         emailError.value = R.string.error_message_registration_invalid_email
+                        errorMessage.add(emailError.value!!)
                     }
                     else -> {
                         Log.e(
@@ -145,18 +149,15 @@ class RegisterViewModel(
                             "Unknown error $it",
                             throwable
                         )
-
+                        errorMessage.add(R.string.error_message_unknown)
                         progress.value = Progress.Error()
                     }
                 }
             }
-
-            progress.value = Progress.Error()
+        } else {
+            errorMessage.add(R.string.error_message_unknown)
         }
-
-        if (progress.value !is Progress.Error) {
-            progress.value = Progress.Error(R.string.error_message_unknown)
-        }
+        progress.value = Progress.Error(errorMessage.first() ?: R.string.error_message_unknown)
     }
 
 }
