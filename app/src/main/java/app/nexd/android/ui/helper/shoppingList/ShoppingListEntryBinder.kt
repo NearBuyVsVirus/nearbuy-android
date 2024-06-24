@@ -26,11 +26,9 @@ class ShoppingListEntryBinder :
             crossed.visibility = if (entry.isCollected) View.VISIBLE else View.GONE
 
             itemView.setOnClickListener {
-                if (!entry.isCollected) { // TODO: rather update view than immediate selection/deselection
                     entry.isCollected = !entry.isCollected
                     crossed.visibility = if (entry.isCollected) View.VISIBLE else View.GONE
                     toggleItemSelection()
-                }
             }
         }
     }
