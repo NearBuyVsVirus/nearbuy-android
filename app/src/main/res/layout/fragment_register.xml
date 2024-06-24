@@ -22,8 +22,8 @@
             android:clickable="true"
             android:focusable="true"
             android:theme="@style/ToolbarThemeWhite"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="?attr/homeAsUpIndicator" />
 
         <ScrollView
@@ -39,134 +39,140 @@
 
                 <ProgressBar
                     android:id="@+id/progressBar"
-                    android:layout_alignParentTop="true"
-                    android:visibility="gone"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:max="100"
-                    android:padding="0dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginTop="-6dp"
                     android:layout_marginBottom="-8dp"
-                    android:indeterminateTint="@color/colorPrimaryDark" />
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimaryDark"
+                    android:max="100"
+                    android:padding="0dp"
+                    android:visibility="gone" />
 
                 <LinearLayout
-                    android:paddingHorizontal="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp">
 
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_marginTop="92dp"
                         android:layout_width="match_parent"
                         android:layout_height="148dp"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="92dp"
                         android:src="@drawable/nexd_logo_rgb"
                         tools:ignore="ContentDescription" />
 
                     <Space
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
                     <EditText
                         android:id="@+id/editText_first_name"
+                        style="@style/AuthenticationEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:autofillHints="personGivenName"
+                        android:drawableEnd="@drawable/ic_person"
+                        android:enabled="@{viewModel.firstNameIsEnabled}"
                         android:error="@{viewModel.firstNameError}"
-                        style="@style/AuthenticationEditText"
                         android:hint="@string/registration_placeholder_firstName"
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords"
                         android:lines="1"
                         android:nextFocusDown="@id/editText_last_name"
                         android:paddingHorizontal="10dp"
-                        android:text="@={viewModel.firstName}"
-                        android:drawableEnd="@drawable/ic_person"/>
+                        android:text="@={viewModel.firstName}" />
 
                     <EditText
                         android:id="@+id/editText_last_name"
+                        style="@style/AuthenticationEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autofillHints="personFamilyName"
+                        android:drawableEnd="@drawable/ic_person"
+                        android:enabled="@{viewModel.lastNameIsEnabled}"
                         android:error="@{viewModel.lastNameError}"
-                        style="@style/AuthenticationEditText"
                         android:hint="@string/registration_placeholder_lastName"
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords"
                         android:lines="1"
                         android:nextFocusDown="@id/editText_email"
                         android:paddingHorizontal="10dp"
-                        android:text="@={viewModel.lastName}"
-                        android:drawableEnd="@drawable/ic_person"/>
+                        android:text="@={viewModel.lastName}" />
 
                     <EditText
                         android:id="@+id/editText_email"
+                        style="@style/AuthenticationEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autofillHints="emailAddress"
+                        android:drawableEnd="@drawable/ic_email"
+                        android:enabled="@{viewModel.emailIsEnabled}"
                         android:error="@{viewModel.emailError}"
-                        style="@style/AuthenticationEditText"
                         android:hint="@string/registration_placeholder_email"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:lines="1"
                         android:nextFocusDown="@id/editText_password"
                         android:paddingHorizontal="10dp"
-                        android:text="@={viewModel.email}"
-                        android:drawableEnd="@drawable/ic_email"/>
+                        android:text="@={viewModel.email}" />
 
                     <EditText
                         android:id="@+id/editText_password"
+                        style="@style/AuthenticationEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:autofillHints="newPassword"
+                        android:drawableEnd="@drawable/ic_lock"
+                        android:enabled="@{viewModel.passwordIsEnabled}"
                         android:error="@{viewModel.passwordError}"
-                        style="@style/AuthenticationEditText"
                         android:hint="@string/registration_placeholder_password"
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
                         android:lines="1"
                         android:nextFocusDown="@id/editText_password_confirm"
                         android:paddingHorizontal="10dp"
-                        android:text="@={viewModel.password}"
-                        android:drawableEnd="@drawable/ic_lock"/>
+                        android:text="@={viewModel.password}" />
 
                     <EditText
                         android:id="@+id/editText_password_confirm"
+                        style="@style/AuthenticationEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autofillHints="newPassword"
+                        android:drawableEnd="@drawable/ic_lock"
+                        android:enabled="@{viewModel.passwordConfirmationIsEnabled}"
                         android:error="@{viewModel.passwordConfirmationError}"
-                        style="@style/AuthenticationEditText"
                         android:hint="@string/registration_placeholder_confirm_password"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:lines="1"
                         android:paddingHorizontal="10dp"
-                        android:text="@={viewModel.passwordConfirmation}"
-                        android:drawableEnd="@drawable/ic_lock"/>
+                        android:text="@={viewModel.passwordConfirmation}" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
-                <CheckBox
-                    android:id="@+id/checkbox_data_protection"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:buttonTint="@color/colorPrimary"
-                    android:checked="@={viewModel.dataProtection}"
-                    android:error="@{viewModel.dataProtectionError}"
-                    tools:checked="true"
-                    tools:text="@string/registration_label_privacy_policy_agreement" />
+                    <CheckBox
+                        android:id="@+id/checkbox_data_protection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="@={viewModel.dataProtection}"
+                        android:enabled="@{viewModel.dataProtectionIsEnabled}"
+                        android:error="@{viewModel.dataProtectionError}"
+                        tools:checked="true"
+                        tools:text="@string/registration_label_privacy_policy_agreement" />
 
                     <Button
                         android:id="@+id/button_register"
@@ -176,6 +182,7 @@
                         android:background="@drawable/rounded_primary"
                         android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
                         android:drawableTint="@android:color/white"
+                        android:enabled="@{viewModel.buttonRegisterIsEnabled}"
                         android:padding="20dp"
                         android:text="@string/registration_button_title_continue"
                         android:textAlignment="textStart"
@@ -192,6 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
+                        android:enabled="@{viewModel.buttonDataProtectionIsEnabled}"
                         android:minHeight="0dp"
                         android:text="@string/registration_term_privacy_policy"
                         android:textAllCaps="false" />

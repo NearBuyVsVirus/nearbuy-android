@@ -56,7 +56,6 @@ class RegisterDetailedFragment : Fragment() {
         }
 
         binding.buttonRegister.setOnClickListener {
-            switchUiIsEnabled(false)
             vm.setUserDetails()
         }
 
@@ -71,13 +70,12 @@ class RegisterDetailedFragment : Fragment() {
                         DefaultSnackBar(view, it, Snackbar.LENGTH_SHORT)
                     }
                     binding.progressBar.visibility = View.GONE
-                    switchUiIsEnabled(true)
+
                 }
                 is Finished -> {
                     activityVm.setUserAsComplete()
                     findNavController().navigateUp()
                     binding.progressBar.visibility = View.GONE
-                    switchUiIsEnabled(true)
                 }
             }
         })
@@ -96,15 +94,4 @@ class RegisterDetailedFragment : Fragment() {
         )
     }
 
-    // TODO: migrate that to ViewModel and bind visibility
-    private fun switchUiIsEnabled(enable: Boolean) {
-        binding.apply {
-            editTextPhoneNumber.isEnabled = enable
-            editTextStreet.isEnabled = enable
-            editTextHouseNr.isEnabled = enable
-            editTextZipCode.isEnabled = enable
-            editTextCity.isEnabled = enable
-            buttonRegister.isEnabled = enable
-        }
-    }
 }

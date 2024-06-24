@@ -26,28 +26,31 @@ class RegisterViewModel(
     }
 
     val firstName = MutableLiveData("")
-
     val firstNameError = MutableLiveData(0)
+    val firstNameIsEnabled = MutableLiveData(true)
 
     val lastName = MutableLiveData("")
-
     val lastNameError = MutableLiveData(0)
+    val lastNameIsEnabled = MutableLiveData(true)
 
     val email = MutableLiveData("")
-
     val emailError = MutableLiveData(0)
+    val emailIsEnabled = MutableLiveData(true)
 
     val password = MutableLiveData("")
-
     val passwordError = MutableLiveData(0)
+    val passwordIsEnabled = MutableLiveData(true)
 
     val passwordConfirmation = MutableLiveData("")
-
     val passwordConfirmationError = MutableLiveData(0)
+    val passwordConfirmationIsEnabled = MutableLiveData(true)
 
     val dataProtection = MutableLiveData(false)
-
     val dataProtectionError = MutableLiveData(0)
+    val dataProtectionIsEnabled = MutableLiveData(true)
+
+    val buttonRegisterIsEnabled = MutableLiveData(true)
+    val buttonDataProtectionIsEnabled = MutableLiveData(true)
 
     val progress = MutableLiveData<Progress>(Progress.Idle)
 
@@ -60,6 +63,7 @@ class RegisterViewModel(
     }
 
     fun register() {
+        switchUiIsEnabled(false)
         var success = true
 
         if (firstName.value.isNullOrEmpty()) {
@@ -111,14 +115,17 @@ class RegisterViewModel(
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         {
+                            switchUiIsEnabled(true)
                             progress.value = Progress.Finished(token = it.accessToken)
                         },
                         {
+                            switchUiIsEnabled(true)
                             handleErrors(it)
                         }
                     )
             }
         } else {
+            switchUiIsEnabled(true)
             progress.value = Progress.Error()
         }
     }
@@ -157,6 +164,17 @@ class RegisterViewModel(
         if (progress.value !is Progress.Error) {
             progress.value = Progress.Error(R.string.error_message_unknown)
         }
+    }
+
+    private fun switchUiIsEnabled(enable: Boolean) {
+        firstNameIsEnabled.value = enable
+        lastNameIsEnabled.value = enable
+        emailIsEnabled.value = enable
+        passwordIsEnabled.value = enable
+        passwordConfirmationIsEnabled.value = enable
+        dataProtectionIsEnabled.value = enable
+        buttonRegisterIsEnabled.value = enable
+        buttonDataProtectionIsEnabled.value = enable
     }
 
 }
