@@ -88,7 +88,7 @@
     <string name="helper_request_overview_item_type_recording">"Sprachnachricht"</string>
     <string name="helper_request_overview_item_type_list">"Liste"</string>
     <string name="helper_request_transcript_button_done">"Füge Bestellung zur aktuellen Shoppingliste hinzu"</string>
-    <string name="role_screen_title">"Willkommen, "</string>
+    <string name="role_screen_title">"Willkommen, %1$s!"</string>
     <string name="role_screen_subtitle">"Was möchtest du heute tun?"</string>
     <string name="helper_type_screen_title">"Wie würdest du gerne helfen?"</string>
     <string name="helper_type_button_shopping">"Bestellung ausführen"</string>

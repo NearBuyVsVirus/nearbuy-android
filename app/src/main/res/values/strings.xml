@@ -88,7 +88,7 @@
     <string name="helper_request_overview_item_type_recording">"Recording"</string>
     <string name="helper_request_overview_item_type_list">"List"</string>
     <string name="helper_request_transcript_button_done">"Add order to Current Item List"</string>
-    <string name="role_screen_title">"Welcome, "</string>
+    <string name="role_screen_title">Welcome, %1$s!</string>
     <string name="role_screen_subtitle">"What would you like to do today?"</string>
     <string name="helper_type_screen_title">"How would you like to help?"</string>
     <string name="helper_type_button_shopping">"I'd like to shop!"</string>
